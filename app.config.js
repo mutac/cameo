@@ -11,7 +11,7 @@ var server = {
 
   url: {
     api: '/api',
-    image: '/img',
+    static: '/static',
     database: 'tingodb://' + path.join(buildDirectory, 'db'),
 
     resolveFromPath: resolveUrlFromPath
@@ -19,7 +19,7 @@ var server = {
 
   path: {
     build: absoluteServerPath(buildDirectory),
-    image: absoluteServerPath(path.join(buildDirectory, 'img')),
+    static: absoluteServerPath(path.join(buildDirectory, 'static')),
     database: absoluteServerPath(path.join(buildDirectory, 'db')),
     script: absoluteServerPath('scripts')
   }
@@ -58,6 +58,9 @@ function resolveUrlFromPath(location) {
     return path.join(url, location.replace(server.path.build, ''));
   else
     throw 'Unable to resolve URL from path ' + location;
+}
+
+function makeImagePath(filename) {
 }
 
 module.exports = {

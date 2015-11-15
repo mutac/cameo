@@ -32,9 +32,9 @@ function capture(req, res) {
   var w = 1024;
 
   Image.create(h, w, 'capture', 'png', (err, image) => {
-    var pathToImage = path.join(server.path.image, image.filename);
-    var cmd = [captureScript, w, h, pathToImage].join(' ');
+    var pathToImage = path.join(server.path.static, image.filename);
     var url = server.url.resolveFromPath(pathToImage);
+    var cmd = [captureScript, w, h, pathToImage].join(' ');
 
     var child = exec(cmd, (error, stdout, stderr) => {
       if (error) {

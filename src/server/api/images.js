@@ -1,4 +1,3 @@
-
 /**
   endpoint: api/images
   method: get
@@ -11,19 +10,37 @@
   ]
 */
 
+import image from '../database/image';
+import path from 'path';
+
+var Image = image.Model;
+
 function images(req, res) {
-  res.json([
-    {
-      src: 'https://placekitten.com/1200/900',
-      h: 900,
-      w: 1200
-    },
-    {
-      src: 'https://placekitten.com/1200/800',
-      h: 800,
-      w: 1200
+  var server = req.app.locals.server;
+
+  Image.find( {}, (err, images) => {
+    if (!err) {
+      var response = [];
+
+      images.forEach( (image) => {
+        // TODO: Paths and urls
+        var imagePath = path.join(server.path.static, image.filename);
+        var imageUrl = server.url.resolveFromPath(imagePath);
+
+        response.push({
+          src: imageUrl,
+          h: image.h,
+          w: image.w
+        });
+      });
+
+      res.json(response);
+    } else {
+      res.json({
+        error: err
+      });
     }
-  ]);
+  });
 }
 
 export default {

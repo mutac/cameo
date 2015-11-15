@@ -39,8 +39,8 @@ imageSchema.statics.create = function(h, w, baseName, ext, cb) {
   });
 };
 
-imageSchema.statics.synchronizeWithImageDirectory = function(app, cb) {
-  var imageFiles = fs.readdirSync(app.locals.paths.image);
+imageSchema.statics.synchronizeWithDirectory = function(directory, cb) {
+  var imageFiles = fs.readdirSync(directory);
 
   if (imageFiles) {
     Image.find(
@@ -52,7 +52,7 @@ imageSchema.statics.synchronizeWithImageDirectory = function(app, cb) {
           });
         }
 
-        cb(err, stale ? stale && stale.length > 0 : undefined);
+        cb(err, stale && stale.length > 0 ? stale : undefined);
       }
     );
   } else {

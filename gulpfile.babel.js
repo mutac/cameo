@@ -11,7 +11,7 @@ import mkdirp from 'mkdirp';
 import configs from './webpack.config';
 const [ frontendConfig, backendConfig ] = configs;
 
-gulp.task('dev', () => {
+gulp.task('dev', [ 'directories' ], () => {
   const compiler = webpack(frontendConfig);
 
   const server = express();
@@ -25,7 +25,7 @@ gulp.task('dev', () => {
     }).pipe(res);
   });
 
-  server.use(backendConfig.app.url.image, express.static(backendConfig.app.path.image));
+  server.use(backendConfig.app.url.static, express.static(backendConfig.app.path.static));
   server.use(WebpackDevMiddleware(compiler));
   server.use(WebpackHotMiddleware(compiler));
 
@@ -65,9 +65,9 @@ gulp.task('directories', () => {
     if (err)
       console.log('Could not make database directory: "' + backendConfig.app.path.database + '" - ' + err);
   });
-  mkdirp(backendConfig.app.path.image, (err) => {
+  mkdirp(backendConfig.app.path.static, (err) => {
     if (err)
-      console.log('Could not make image directory: "' + backendConfig.app.path.image + '" - ' + err);
+      console.log('Could not make static directory: "' + backendConfig.app.path.static + '" - ' + err);
   });
 });
 
