@@ -29,10 +29,10 @@ gulp.task('dev', [ 'directories' ], () => {
   server.use(WebpackDevMiddleware(compiler));
   server.use(WebpackHotMiddleware(compiler));
 
-  server.listen(backendConfig.app.port.frontend, 'localhost', (err) => {
+  server.listen(backendConfig.app.port.frontend, (err) => {
     if (err)
       return console.log(err);
-    console.log('webpack-dev-server listening on localhost:' + backendConfig.app.port.frontend);
+    console.log('webpack-dev-server listening on:' + backendConfig.app.port.frontend);
   });
 });
 

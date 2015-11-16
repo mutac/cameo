@@ -28,7 +28,7 @@ var frontendConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Skele',
+      title: 'Cameo',
       filename: 'index.html',
       template: 'src/frontend/index.template.html',
       inject: true
@@ -46,6 +46,26 @@ var frontendConfig = {
         test: /\.scss$/,
         include: path.join(__dirname, 'src', 'frontend', 'scss'),
         loaders: ['style', 'css', 'sass']
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.gif$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.png$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.svg$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
       }
     ]
   }

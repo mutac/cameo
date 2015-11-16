@@ -1,6 +1,10 @@
 import React from 'react';
-import { fetchShouts } from '../actions';
+import { fetchImages } from '../actions/image';
 import { connect } from 'react-redux';
+
+import '../assets/cameo.css';
+import 'react-photoswipe/lib/photoswipe.css';
+import {PhotoSwipe} from 'react-photoswipe';
 
 class Application extends React.Component {
   constructor(props) {
@@ -8,19 +12,28 @@ class Application extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchShouts());
+    this.props.dispatch(fetchImages());
+  }
+
+  handleClose() {
+    this.setState({
+      isOpen: false
+    })
   }
 
   render() {
     return (
-      <div>
-        <h1>Shouts</h1>
-        <ul>
-          { this.props.shouts.map((s, i) => <li key={i}>{s}</li>) }
-        </ul>
-      </div>
+      <PhotoSwipe
+        isOpen={true}
+        items={this.props.items}
+        options={this.props.options}
+        onClose={this.handleOnClose} />
     );
   }
 }
 
-export default connect(state => ({ shouts: state.shouts }))(Application);
+function mapStateToProps(state) {
+  return { items: state.items };
+}
+
+export default connect(mapStateToProps)(Application);
