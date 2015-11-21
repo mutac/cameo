@@ -1,0 +1,3 @@
+[submodule "lib/react-photoswipe"]
+	path = lib/react-photoswipe
+	url = git@github.com:mutac/react-photoswipe.git

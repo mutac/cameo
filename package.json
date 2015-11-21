@@ -15,7 +15,7 @@
     "express": "^4.13.3",
     "tungus": "0.0.5",
     "mongoose": "3.6.11",
-    "react-photoswipe": "^0.4.0"
+    "react-photoswipe": "file:./lib/react-photoswipe"
   },
   "devDependencies": {
     "babel": "^5.8.23",
