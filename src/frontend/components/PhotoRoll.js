@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSlides } from '../actions/image';
+import { getSlides } from '../core/actions';
 import { connect } from 'react-redux';
 
 import '../assets/cameo.css';

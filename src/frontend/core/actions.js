@@ -1,4 +1,4 @@
-import 'whatwg-fetch'; //polyfill
+import '../core/polyfill';
 import { VIEW_SLIDES } from '../core/constants';
 
 export function getSlides() {
@@ -13,7 +13,7 @@ export function getSlides() {
   }
 }
 
-export function captureImage() {
+export function takePicture() {
   return dispatch => {
     fetch('/api/camera/capture')
       .then(resp => resp.json())

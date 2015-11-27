@@ -2,20 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ReactSwipe from 'react-swipe';
 
+import SwipeToExit from './SwipeToExit';
 import Capture from './Capture';
 import PhotoRoll from './PhotoRoll';
 
 import { takePicture } from '../core/actions';
 
 class Application extends React.Component {
-  static swipeIndexOfPhotoRollScreen = 1;
-
-  onTransition = (index, elem) => {
-    /*
-    if (index == this.swipeIndexOfPhotoRollScreen) {
-    }
-    */
-  };
 
   renderCaptureScreen() {
     return (

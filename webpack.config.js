@@ -40,7 +40,14 @@ var frontendConfig = {
       {
         test: /\.js$/,
         include: path.join(__dirname, 'src', 'frontend'),
-        loaders: ['babel']
+        loader: 'babel',
+        query: {
+          extra: {
+            transform: 'react-transform-hmr',
+            imports: ['react'],
+            locals: ['module']
+          }
+        }
       },
       {
         test: /\.scss$/,

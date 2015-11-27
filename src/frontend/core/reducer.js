@@ -1,8 +1,10 @@
 
-import {viewSlides} from './state';
+import {start, viewSlides} from './state';
 import {VIEW_SLIDES} from './constants';
 
-export default function reducer(state, action) {
+const INITIAL_STATE = start();
+
+export default function reducer(state = INITIAL_STATE, action) {
   switch(action.type) {
     case VIEW_SLIDES:
       return viewSlides(state, action.slides);

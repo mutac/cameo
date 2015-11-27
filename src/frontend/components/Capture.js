@@ -1,5 +1,5 @@
 import React from 'react';
-import { captureImage } from '../actions/camera';
+import { captureImage } from '../core/actions';
 import { connect } from 'react-redux';
 
 import '../assets/cameo.css';

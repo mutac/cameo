@@ -1,5 +1,6 @@
-import {expect} from './chai-use-immutable';
+import {expect} from '../util/chai-use-immutable';
 import {List, Map} from 'immutable';
+import {someSlides} from '../util/helpers';
 
 import {
   start,
@@ -18,34 +19,6 @@ describe('application logic', () => {
   });
 
   describe('viewSlides', () => {
-    function aSlide() {
-      return {
-        src: '/path/to/newImage.jpg',
-        h: 100,
-        w: 200
-      };
-    }
-
-    function someSlides() {
-      return [
-        {
-          src: '/path/to/img1.jpg',
-          h: 100,
-          w: 200
-        },
-        {
-          src: '/path/to/img2.jpg',
-          h: 100,
-          w: 200
-        },
-        {
-          src: '/path/to/img3.jpg',
-          h: 100,
-          w: 200
-        }
-      ];
-    }
-
     it('waiting for slides', () => {
       const state = Map();
       const nextState = waitingForSlides(state);
