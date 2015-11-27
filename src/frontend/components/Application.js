@@ -1,39 +1,54 @@
 import React from 'react';
-import { fetchImages } from '../actions/image';
 import { connect } from 'react-redux';
+import ReactSwipe from 'react-swipe';
 
-import '../assets/cameo.css';
-import 'react-photoswipe/lib/photoswipe.css';
-import {PhotoSwipe} from 'react-photoswipe';
+import Capture from './Capture';
+import PhotoRoll from './PhotoRoll';
+
+import { takePicture } from '../core/actions';
 
 class Application extends React.Component {
-  constructor(props) {
-    super(props);
+  static swipeIndexOfPhotoRollScreen = 1;
+
+  onTransition = (index, elem) => {
+    /*
+    if (index == this.swipeIndexOfPhotoRollScreen) {
+    }
+    */
+  };
+
+  renderCaptureScreen() {
+    return (
+      <ReactSwipe
+        continuous = {false}
+        disableScroll = {true}
+        transitionEnd = {this.onTransition}>
+          <Capture key = 'CaptureScreen'/>
+          <div key = 'TransitionToPhotoRoll'/>
+      </ReactSwipe>
+    );
   }
 
-  componentWillMount() {
-    this.props.dispatch(fetchImages());
+  renderPhotoRoll() {
+    return (
+      <PhotoRoll onClose = {this.onTransition}/>
+    );
   }
 
-  handleClose() {
-    this.setState({
-      isOpen: false
-    })
+  renderStartScreen() {
   }
 
   render() {
-    return (
-      <PhotoSwipe
-        isOpen={true}
-        items={this.props.items}
-        options={this.props.options}
-        onClose={this.handleOnClose} />
-    );
+    if (this.mode() == Mode.captureMode){
+      return this.renderCaptureScreen();
+    } else if (this.mode() == Mode.photoRollMode) {
+      return this.renderPhotoRoll();
+    }
   }
 }
 
 function mapStateToProps(state) {
-  return { items: state.items };
+  return { mostRecentlyCapturedImage: state.capturedImage };
 }
 
 export default connect(mapStateToProps)(Application);

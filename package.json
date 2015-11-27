@@ -15,7 +15,9 @@
     "express": "^4.13.3",
     "tungus": "0.0.5",
     "mongoose": "3.6.11",
-    "react-photoswipe": "file:./lib/react-photoswipe"
+    "react-photoswipe": "^0.4.0",
+    "react-swipe": "^2.0.x",
+    "immutable": "^3.7.x"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -41,7 +43,11 @@
     "file-loader": "^0.8.4",
     "svg-loader": "^0.0.2",
     "html-loader": "^0.3.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+
+    "chai": "^3.4.x",
+    "mocha": "^2.3.x",
+    "chai-immutable": "^1.5.x"
   },
   "keywords": [
     "react",
@@ -52,6 +58,9 @@
   ],
   "scripts": {
     "prestart": "npm install",
-    "start": "gulp"
+    "start": "gulp",
+    "test": "mocha --compilers js:babel-core/register --recursive test/frontend",
+    "test:watch": "npm run test -- --watch",
+    "test-server": "mocha --compilers js:babel-core/register --recursive test/server"
   }
 }

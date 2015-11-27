@@ -1,0 +1,4 @@
+//export const RECEIVED_SLIDES = 'RECEIVED_SLIDES';
+//export const CAPTURE_COMPLETED = 'CAPTURE_COMPLETED';
+
+export const VIEW_SLIDES = 'VIEW_SLIDES';

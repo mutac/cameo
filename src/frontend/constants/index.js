@@ -1,1 +1,0 @@
-export const RECEIVED_ITEMS = 'RECEIVED_ITEMS';

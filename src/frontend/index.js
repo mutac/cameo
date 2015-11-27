@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import Root from './Root';
+import Root from './components';
 import { createHistory } from 'history';
 
 // Import required so that React is available even
