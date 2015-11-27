@@ -5,7 +5,10 @@ import {List, Map} from 'immutable';
 chai.use(chaiImmutable);
 
 function isImmutable(obj) {
-  return (typeof(obj) === 'List' || typeof(obj) === 'Map');
+  let isMap = obj instanceof Map;
+  let isList = obj instanceof List;
+
+  return isMap || isList;
 }
 
 chai.use((_chai, utils) => {
