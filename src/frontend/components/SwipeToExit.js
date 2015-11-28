@@ -1,25 +1,48 @@
 import React from 'react';
-import ReactSwipe from 'react-swipe';
+import Swipe from 'react-swipe';
 
-class SwipeToExit extends React.Component {
-  static defaultProps = {
-    onExit: React.PropTypes.func
+export class SwipeToExit extends React.Component {
+  static propTypes = {
+    onExit: React.PropTypes.func.isRequired
   };
 
-  onTransition = (index, elem) => {
+  transitionEnd = (index, element) => {
+    if (this.isExitSlide(element)) {
+      this.props.onExit();
+    }
   };
+
+  isExitSlide(element) {
+    // Use className.  Element that is passed back is not
+    // a React component.
+    return element.className == this.subComponents().exitSlide.className;
+  }
+
+  subComponents() {
+    return {
+      exitSlide: {
+        ref: this.refs.Exit,
+        refName: 'Exit',
+        className: '_Exit'
+      }
+    };
+  }
+
+  getChildren() {
+    return this.props.children || [];
+  }
 
   render() {
     return (
-      <ReactSwipe
+      <Swipe
         continuous = {false}
         disableScroll = {true}
-        transitionEnd = {this.onTransition}>
-        {this.props.children}
-        <div key = 'ExitTransition'/>
-      </ReactSwipe>
+        transitionEnd = {this.transitionEnd}>
+        {this.getChildren()}
+        <div
+          ref = {this.subComponents().exitSlide.refName}
+          className = {this.subComponents().exitSlide.className}/>
+      </Swipe>
     )
   }
 }
-
-export default SwipeToExit;

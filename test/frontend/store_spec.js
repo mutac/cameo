@@ -4,7 +4,7 @@ import {someSlides} from '../util/helpers';
 
 import {makeStore} from '../../src/frontend/core/store';
 import {start} from '../../src/frontend/core/state';
-import { VIEW_SLIDES } from '../../src/frontend/core/constants';
+import {setSlides} from '../../src/frontend/core/actions';
 
 describe('store', () => {
   it ('has start state', () => {
@@ -14,10 +14,7 @@ describe('store', () => {
 
   it ('is connected to reducer', () => {
     const store = makeStore();
-    store.dispatch({
-      type: VIEW_SLIDES,
-      slides: someSlides()
-    });
+    store.dispatch(setSlides(someSlides()));
     expect(store.getState()).to.equal(fromJS({
       slides: List(someSlides())
     }));

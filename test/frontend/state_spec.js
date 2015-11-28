@@ -4,12 +4,12 @@ import {someSlides} from '../util/helpers';
 
 import {
   start,
-  viewSlides,
+  slidesAvailable,
   waitingForSlides,
   isWaitingForSlides
 } from '../../src/frontend/core/state';
 
-describe('application logic', () => {
+describe('state', () => {
   describe('start state', () => {
     it('empty initial state', () => {
       let initialState = start();
@@ -18,7 +18,7 @@ describe('application logic', () => {
     });
   });
 
-  describe('viewSlides', () => {
+  describe('setSlides', () => {
     it('waiting for slides', () => {
       const state = Map();
       const nextState = waitingForSlides(state);
@@ -33,7 +33,7 @@ describe('application logic', () => {
     it('begin viewing slides', () => {
       const state = Map();
       const slides = someSlides();
-      const nextState = viewSlides(state, slides);
+      const nextState = slidesAvailable(state, slides);
       expect(nextState).to.equal(Map({
         slides: List(someSlides())
       }));

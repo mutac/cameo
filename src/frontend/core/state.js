@@ -4,7 +4,7 @@ export function start() {
   return Map();
 }
 
-export function viewSlides(state, slides) {
+export function slidesAvailable(state, slides) {
   return state.set('slides', List(slides));
 }
 

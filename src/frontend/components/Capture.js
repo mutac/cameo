@@ -1,53 +1,37 @@
 import React from 'react';
-import { captureImage } from '../core/actions';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import '../assets/cameo.css';
+import {SwipeToExit} from './SwipeToExit';
+import {ShutterButton} from './ShutterButton';
 
-class Capture extends React.Component {
-  static propTypes = {
-    onCapture: React.PropTypes.func
+import {takePicture} from '../core/actions';
+import {isWaitingForSlides} from '../core/state';
+
+export class Capture extends React.Component {
+
+  onCaptureTouch = () => {
+    console.log('Taking a picture');
   };
 
-  static defaultProps = {
-    height: '150px',
-    margin: '10%'
-  };
-
-  onCaptureRequested = () => {
-    console.log("Capture Requested");
-    this.props.dispatch(captureImage());
-
-    if (this.props.onCapture) {
-      this.props.onCapture();
-    }
-  };
-
-  style() {
-    return {
-      height: this.props.height,
-      margin: this.props.margin
-    }
+  onCaptureExit = () => {
+    console.log('Exiting Capture');
   }
 
   render() {
     return (
-      <div>
-        <div className='capture-slide'>
-          <div
-            onClick = {this.onCaptureRequested}
-            onFocus = {this.onCaptureRequested}
-            className='shutter-icon transition-easy transition-rotation transition-opacity'
-            style={this.style()}>
-          </div>
-        </div>
-      </div>
+      <SwipeToExit onExit = {this.onCaptureExit}>
+        <ShutterButton
+          isWaiting = {this.props.isWaitingForCapture}
+          onTouch = {this.onCaptureTouch}/>
+      </SwipeToExit>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { capturedImage: state.capturedImage };
+  return {
+    isWaitingForCapture: isWaitingForSlides(state)
+  }
 }
 
-export default connect(mapStateToProps)(Capture);
+export const CaptureContainer = connect(mapStateToProps)(Capture);

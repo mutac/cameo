@@ -1,9 +1,18 @@
 import {expect} from '../util/chai-use-immutable';
-import {Map, fromJS} from 'immutable';
 import {someSlides} from '../util/helpers';
 
-import {VIEW_SLIDES} from '../../src/frontend/core/constants';
-import {start} from '../../src/frontend/core/state';
+import {
+  setSlides,
+  fetchSlidesRequest,
+  takePictureRequest
+} from '../../src/frontend/core/actions';
+
+import {
+  start,
+  waitingForSlides,
+  slidesAvailable
+} from '../../src/frontend/core/state';
+
 import reducer from '../../src/frontend/core/reducer';
 
 describe('reducer', () => {
@@ -13,12 +22,30 @@ describe('reducer', () => {
     expect(nextState).to.equal(initialState);
   });
 
-  it('handles VIEW_SLIDES', () => {
+  it('handles SET_SLIDES', () => {
     const initialState = start();
-    const action = { type: VIEW_SLIDES, slides: someSlides() };
+    const action = setSlides(someSlides());
     const nextState = reducer(initialState, action);
-    expect(nextState).to.equal(fromJS({
-      slides: someSlides()
-    }));
+    expect(nextState).to.equal(
+      slidesAvailable(initialState, someSlides())
+    );
+  });
+
+  it('handles FETCH_SLIDES_REQUEST', () => {
+    const initialState = start();
+    const action = fetchSlidesRequest();
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(
+      waitingForSlides(initialState)
+    );
+  });
+
+  it('handles TAKE_PICTURE_REQUEST', () => {
+    const initialState = start();
+    const action = takePictureRequest();
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(
+      waitingForSlides(initialState)
+    );
   });
 });

@@ -1,10 +1,10 @@
-.capture-slide {
+.take-picture {
   width: 100%;
   max-width: 400px;
   margin: 120px auto 0;
 }
 
-.capture-slide-text {
+.take-picture-text {
   font-size: 14pt;
   color: #202020;
   text-align: center;
@@ -18,34 +18,75 @@
   z-index: -10000;
 }
 
-.transition-easy {
-  -webkit-transition: all 2s ease;
-  transition: all 2s ease;
+.transition-ease {
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-.transition-rotation:hover {
+.focus-transition-rotation-180:hover {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
-.transition-rotation:focus {
+.focus-transition-rotation-180:focus {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
-.transition-rotation:active {
+.focus-transition-rotation-180:active {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
-.transition-opacity {
+.maximal-opacity {
   opacity: 1.0;
 }
 
-.transition-opacity:hover {
+.minimal-opacity {
   opacity: 0.2;
 }
 
-.transition-opacity:focus {
+.focus-transition-minimal-opacity:hover {
   opacity: 0.2;
+}
+
+.focus-transition-minimal-opacity:focus {
+  opacity: 0.2;
+}
+
+.animation-rotation-360 {
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 1s;
+  -moz-transition-property: -moz-transform;
+  -moz-transition-duration: 1s;
+  transition-property: transform;
+  transition-duration: 1s;
+
+  -webkit-animation-name: rotation-360;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: rotation-360;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  animation-name: rotation-360;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotation-360 {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotation-360 {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+
+@keyframes rotation-360 {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }
