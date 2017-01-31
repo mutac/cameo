@@ -1,15 +1,15 @@
+import {curry} from 'fjs';
 
 import {
   start,
-  slidesAvailable,
-  waitingForSlides
+
+  applyToCamera,
+  waitingForNewImage,
+  newImageAvailable,
+  cameraFailure
 } from './state';
 
 import {
-  SET_SLIDES,
-  FETCH_SLIDES_REQUEST,
-  FETCH_SLIDES_SUCCESS,
-  FETCH_SLIDES_FAILURE,
   TAKE_PICTURE_REQUEST,
   TAKE_PICTURE_SUCCESS,
   TAKE_PICTURE_FAILURE
@@ -17,15 +17,23 @@ import {
 
 const INITIAL_STATE = start();
 
-export default function reducer(state = INITIAL_STATE, action) {
+const reduceCamera = curry( (action, state) => {
   switch(action.type) {
-    case SET_SLIDES:
-      return slidesAvailable(state, action.slides);
-    case FETCH_SLIDES_REQUEST:
-      return waitingForSlides(state);
     case TAKE_PICTURE_REQUEST:
-      return waitingForSlides(state);
+      return waitingForNewImage;
+    case TAKE_PICTURE_SUCCESS:
+      return newImageAvailable(action.newImage);
+    case TAKE_PICTURE_FAILURE:
+      return cameraFailure(action.ex);
   }
+
+  return state;
+});
+
+export default function reducer(state = INITIAL_STATE, action) {
+  console.log("Handling " + action.type);
+
+  state = applyToCamera(reduceCamera(action))(state);
 
   return state;
 }

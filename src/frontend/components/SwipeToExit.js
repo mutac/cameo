@@ -37,6 +37,7 @@ export class SwipeToExit extends React.Component {
       <Swipe
         continuous = {false}
         disableScroll = {true}
+        stopPropagation = {false}
         transitionEnd = {this.transitionEnd}>
         {this.getChildren()}
         <div

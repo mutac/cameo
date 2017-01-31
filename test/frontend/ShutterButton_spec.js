@@ -43,7 +43,7 @@ describe('ShutterButton', () => {
     */
   });
 
-  it('disabled while waiting', () => {
+  it('is disabled', () => {
     let touched = 0;
     function onTouch() {
       touched = touched + 1;
@@ -51,7 +51,7 @@ describe('ShutterButton', () => {
 
     const component = TestUtils.renderIntoDocument(
       <ShutterButton
-        isWaiting = {true}
+        disabled = {true}
         onTouch = {onTouch}/>
     );
 

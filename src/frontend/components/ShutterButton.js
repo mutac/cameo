@@ -1,16 +1,22 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+import {isWaitingForSlides} from '../core/state';
 
 import '../assets/cameo.css';
 
 export class ShutterButton extends React.Component {
   static propTypes = {
     onTouch: React.PropTypes.func,
-    isWaiting: React.PropTypes.bool,
+    spin: React.PropTypes.bool,
+    disabled: React.PropTypes.bool
   };
 
   static defaultProps = {
     height: '150px',
-    margin: '10%'
+    margin: '10%',
+    spin: false,
+    disabled: false
   };
 
   onTouch = () => {
@@ -22,7 +28,7 @@ export class ShutterButton extends React.Component {
   };
 
   isDisabled() {
-    return this.props.isWaiting;
+    return this.props.disabled;
   }
 
   shutterIconStyle() {
@@ -42,7 +48,7 @@ export class ShutterButton extends React.Component {
 
   shutterTransitionStyleClassNames() {
     return 'shutter-icon maximal-opacity transition-ease \
-      focus-transition-rotation-180 focus-transition-minimal-opacity';
+      active-transition-rotation-180 active-transition-minimal-opacity';
   }
 
   shutterAnimationStyleClassNames() {
@@ -59,7 +65,12 @@ export class ShutterButton extends React.Component {
     }
   }
 
+  getChildren() {
+    return this.props.children || [];
+  }
+
   render() {
+    console.log("Rendering button");
     return (
       <div>
         <div className = 'shutter-icon-container'>

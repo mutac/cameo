@@ -1,6 +1,7 @@
 
 export function base() {
-  return 'http://localhost';
+  return 'http://donetexit:3000';
+  //return '';
 }
 
 export function makeUrl(path) {

@@ -37,10 +37,10 @@ export function takePictureRequest() {
   };
 }
 
-export function takePictureSuccess(slide) {
+export function takePictureSuccess(image) {
   return {
     type: TAKE_PICTURE_SUCCESS,
-    slides: [slide]
+    newImage: image
   }
 }
 
@@ -75,19 +75,5 @@ export function takePicture() {
       .then(res => res.json())
       .then(json => dispatch(takePictureSuccess(json)))
       .catch(ex => dispatch(takePictureFailure(ex)));
-  }
-}
-
-export function waitForSlides() {
-  return {
-    type: SET_SLIDES,
-    slides: null
-  };
-}
-
-export function setSlides(slides) {
-  return {
-    type: SET_SLIDES,
-    slides: slides
   }
 }

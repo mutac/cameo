@@ -4,9 +4,16 @@
   margin: 120px auto 0;
 }
 
-.take-picture-text {
+.error-text {
   font-size: 14pt;
   color: #202020;
+  text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+.exception-text {
+  font-size: 8pt;
+  color: #c6c6c6;
   text-align: center;
   font-family: "Lucida Console", Monaco, monospace;
 }
@@ -23,20 +30,24 @@
   transition: all 0.5s ease;
 }
 
-.focus-transition-rotation-180:hover {
+.active-transition-rotation-180:active {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
+/*
 .focus-transition-rotation-180:focus {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+*/
 
+/*
 .focus-transition-rotation-180:active {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+*/
 
 .maximal-opacity {
   opacity: 1.0;
@@ -46,11 +57,7 @@
   opacity: 0.2;
 }
 
-.focus-transition-minimal-opacity:hover {
-  opacity: 0.2;
-}
-
-.focus-transition-minimal-opacity:focus {
+.active-transition-minimal-opacity:active {
   opacity: 0.2;
 }
 
@@ -77,16 +84,16 @@
 }
 
 @-webkit-keyframes rotation-360 {
-    from {-webkit-transform: rotate(0deg);}
+    /*from {-webkit-transform: rotate(0deg);}*/
     to {-webkit-transform: rotate(360deg);}
 }
 
 @-moz-keyframes rotation-360 {
-    from {-moz-transform: rotate(0deg);}
+    /*from {-moz-transform: rotate(0deg);}*/
     to {-moz-transform: rotate(360deg);}
 }
 
 @keyframes rotation-360 {
-    from {transform: rotate(0deg);}
+    /*from {transform: rotate(0deg);}*/
     to {transform: rotate(360deg);}
 }
